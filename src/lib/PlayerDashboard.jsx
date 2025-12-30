@@ -77,6 +77,8 @@ export const PlayerDashboard = ({
             }}
           >
             Please place your bet on the Master Board.
+            <br />
+            *Hide your browser's toolbar for best experience.
           </div>
         ) : localHand.length === 0 ? (
           <div className={styles.waitingMessage}>Waiting for deal...</div>
