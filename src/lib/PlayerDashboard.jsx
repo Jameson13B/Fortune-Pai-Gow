@@ -63,7 +63,7 @@ export const PlayerDashboard = ({
           </div>
         )} */}
         <div className={styles.gameStatus}>
-          {ctx.activePlayers && ctx.activePlayers[playerID]}
+          {ctx.activePlayers && ctx.activePlayers[playerID].toUpperCase()}
         </div>
       </div>
 
