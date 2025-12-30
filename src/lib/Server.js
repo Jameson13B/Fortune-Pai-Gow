@@ -13,6 +13,7 @@ const server = Server({
 
   origins: [
     "https://paigow.neonfiction.games",
+    "https://fortune-pai-gow-d86ff7aa74be.herokuapp.com/",
     Origins.LOCALHOST_IN_DEVELOPMENT,
   ],
 })
