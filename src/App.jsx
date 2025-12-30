@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Client } from "boardgame.io/react"
 import { SocketIO } from "boardgame.io/multiplayer"
 
-import "./App.css"
+import styles from "./App.module.css"
 import { Lobby } from "./lib/Lobby"
 import { PaiGowGame } from "./lib/Game"
 import { PaiGowBoard } from "./lib/Board"
@@ -51,7 +51,7 @@ function App() {
   if (player && tableCode) {
     return (
       <div className="game-wrapper">
-        <button className="leave-button" onClick={handleLeave}>
+        <button className={styles.actionBtn} onClick={handleLeave}>
           Leave
         </button>
         <PaiGowClient

@@ -1,3 +1,5 @@
+export const MIN_BET = 15
+
 export const Suits = ["S", "C", "D", "H"]
 
 export const JOKER = "JOKER"
@@ -21,7 +23,7 @@ export const Ranks = [
 export const PAYOUTS = [
   { hand: "HAND", pay: "PAYOUT", envy: "ENVY" },
   { hand: "7 Card Straight Flush", pay: "5000:1", envy: "5000" },
-  { hand: "Royal Flush + Royal Match", pay: "2000:1", envy: "1000" },
+  { hand: "Royal Flush + Match", pay: "2000:1", envy: "1000" },
   { hand: "7 Card SF w/ Joker", pay: "1000:1", envy: "500" },
   { hand: "5 Aces", pay: "400:1", envy: "250" },
   { hand: "Royal Flush", pay: "150:1", envy: "50" },

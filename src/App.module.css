@@ -1,0 +1,21 @@
+.actionBtn {
+  position: fixed;
+  bottom: 15px;
+  right: 10px;
+  z-index: 1000;
+  padding: 12px 30px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #219150;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.actionBtn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}

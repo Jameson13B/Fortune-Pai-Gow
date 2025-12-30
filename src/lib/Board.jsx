@@ -2,11 +2,11 @@ import React, { useState } from "react"
 import { Helmet } from "react-helmet"
 import { QRCode } from "react-qr-code"
 
-import "./Board.css"
+import styles from "./Board.module.css"
 import { PlayerDashboard } from "./PlayerDashboard"
 import { DraggableHand } from "./DraggableHand"
 import { Card } from "./Card"
-import { PAYOUTS } from "./consts"
+import { PAYOUTS, MIN_BET } from "./consts"
 
 export const PaiGowBoard = ({
   G,
@@ -87,18 +87,18 @@ export const PaiGowBoard = ({
   }
 
   return (
-    <div className="paigow-board">
+    <div className={styles.paigowBoard}>
       <Helmet>
         <title>{`Fortune Pai Gow - Master`}</title>
       </Helmet>
 
-      <div className="table-felt">
+      <div className={styles.tableFelt}>
         {/* Dealer Area */}
-        <div className="dealer-area">
+        <div className={styles.dealerArea}>
           <h3>DEALER</h3>
           {isBettingPhase && (
             <button
-              className="dealer-button"
+              className={styles.dealerButton}
               disabled={!haveAllPlayersFinishedPhase(ctx, "betting")}
               onClick={handleDealCards}
             >
@@ -107,7 +107,7 @@ export const PaiGowBoard = ({
           )}
           {isSetHandsPhase && !showDealerHand && (
             <button
-              className="dealer-button"
+              className={styles.dealerButton}
               disabled={!haveAllPlayersFinishedPhase(ctx, "setHands")}
               onClick={handleRevealHand}
             >
@@ -116,7 +116,7 @@ export const PaiGowBoard = ({
           )}
           {isSetHandsPhase && showDealerHand && (
             <button
-              className="dealer-button"
+              className={styles.dealerButton}
               style={{
                 boxShadow: "0 0 10px rgba(0,0,0,0.5)",
                 margin: 0,
@@ -129,7 +129,7 @@ export const PaiGowBoard = ({
 
           {isEvaluateHandsPhase && (
             <button
-              className="dealer-button"
+              className={styles.dealerButton}
               disabled={!haveAllPlayersFinishedPhase(ctx, "evaluateHands")}
               onClick={() => {
                 moves.startNextHand()
@@ -142,68 +142,45 @@ export const PaiGowBoard = ({
           )}
         </div>
 
-        <div className="join-code-container left">
-          <p className="join-code-label">Join Here</p>
-          <QRCode
-            value={`${window.location.origin}/join?tableCode=${tableCode}`}
-            bgColor="#35654d"
-            fgColor="#ffd700"
-            style={{
-              width: "80px",
-              height: "80px",
-            }}
-          />
-        </div>
-        <div className="join-code-container right">
-          <p className="join-code-label">Join Here</p>
-          <QRCode
-            value={`${window.location.origin}/join?tableCode=${tableCode}`}
-            bgColor="#35654d"
-            fgColor="#ffd700"
-            style={{
-              width: "80px",
-              height: "80px",
-            }}
-          />
-        </div>
-        {/* Payout Charts */}
-        <p className="table-code left">TABLE - {tableCode}</p>
-        <div className="payout-chart left">
-          <strong
-            style={{
-              textAlign: "center",
-              display: "block",
-              fontSize: "0.9rem",
-              fontFamily: "Gmhightop",
-            }}
-          >
-            FORTUNE BONUS
-          </strong>
-          {PAYOUTS.map((p, i) => (
-            <div key={i}>
-              <span style={{ textAlign: "left", flexGrow: 1 }}>{p.hand}</span>
-              <span style={{ textAlign: "left" }}>{p.pay}</span>
-              {p.envy && <span style={{ textAlign: "right" }}>{p.envy}</span>}
+        {/* Table Info */}
+        <div className={styles.tableInfo}>
+          <strong className={styles.tableTitle}>TABLE INFO</strong>
+          <div className={styles.tableInfoContainer}>
+            <div style={{ opacity: 0.8 }}>
+              <QRCode
+                value={`${window.location.origin}/join?tableCode=${tableCode}`}
+                bgColor="transparent"
+                fgColor="#ffd700"
+                size={80}
+              />
             </div>
-          ))}
+            <div>
+              <p className={styles.tableCode}>
+                <span>Tbl Code:</span> <span>{tableCode}</span>
+              </p>
+              <p className={styles.tableCode}>
+                <span>Min Bet:</span> <span>${MIN_BET}</span>
+              </p>
+              <p className={styles.tableCode}>
+                <span>Phase:</span>{" "}
+                <span>{ctx.activePlayers[0].toUpperCase()}</span>
+              </p>
+            </div>
+          </div>
         </div>
-        <p className="table-code right">TABLE - {tableCode}</p>
-        <div className="payout-chart right">
-          <strong
-            style={{
-              textAlign: "center",
-              display: "block",
-              fontSize: "0.9rem",
-              fontFamily: "Gmhightop",
-            }}
-          >
-            FORTUNE BONUS
-          </strong>
+
+        {/* Payout Chart */}
+        <div className={styles.payoutChart}>
+          <strong className={styles.tableTitle}>FORTUNE BONUS</strong>
           {PAYOUTS.map((p, i) => (
             <div key={i}>
-              <span style={{ textAlign: "left", flexGrow: 1 }}>{p.hand}</span>
-              <span style={{ textAlign: "left" }}>{p.pay}</span>
-              {p.envy && <span style={{ textAlign: "right" }}>{p.envy}</span>}
+              <span style={{ textAlign: "left", width: "60%" }}>{p.hand}</span>
+              <span style={{ textAlign: "center", width: "25%" }}>{p.pay}</span>
+              {p.envy && (
+                <span style={{ textAlign: "center", width: "15%" }}>
+                  {p.envy}
+                </span>
+              )}
             </div>
           ))}
         </div>
@@ -272,7 +249,7 @@ export const PaiGowBoard = ({
           return (
             <React.Fragment key={index}>
               <div
-                className={`player-seat seat-${index}`}
+                className={styles.playerSeat}
                 style={{
                   left: `${left}%`,
                   top: `${top}%`,
@@ -282,13 +259,13 @@ export const PaiGowBoard = ({
                   }deg)`,
                 }}
               >
-                <div className="betting-area">
+                <div className={styles.bettingArea}>
                   <div
-                    className="bonus-bet-spot"
+                    className={styles.bonusBetSpot}
                     onClick={() => handleBet(seatID, "bonus")}
                     style={{
                       cursor: "pointer",
-                      outline: `4px solid ${
+                      outlined: `4px solid ${
                         player.outcome?.[2] == 1
                           ? "lime"
                           : player.outcome?.[2] == -1
@@ -298,21 +275,21 @@ export const PaiGowBoard = ({
                     }}
                   >
                     {player.bet[1] > 0 && (
-                      <div className="chip bonus-chip">{player.bet[1]}</div>
+                      <div className={styles.bonusChip}>{player.bet[1]}</div>
                     )}
                   </div>
                   <div
-                    className="main-bet-circle"
+                    className={styles.mainBetCircle}
                     onClick={() => handleBet(seatID, "main")}
                     style={{ cursor: "pointer" }}
                   >
                     {player.bet[0] > 0 && (
-                      <div className="chip main-chip">{player.bet[0]}</div>
+                      <div className={styles.mainChip}>{player.bet[0]}</div>
                     )}
                   </div>
                 </div>
                 <div
-                  className="player-info"
+                  className={styles.playerInfo}
                   onClick={() => handleClearBet(seatID)}
                 >
                   {matchDataPlayer?.name || `Seat ${seatID} - Open`}
@@ -322,7 +299,7 @@ export const PaiGowBoard = ({
                 </div>
                 {player.outcome ? (
                   <div
-                    className="revealed-hands"
+                    className={styles.revealedHands}
                     style={{
                       marginTop: 10,
                       display: "flex",
@@ -388,10 +365,10 @@ export const PaiGowBoard = ({
                   </div>
                 ) : (
                   <>
-                    <div className="player-low-pile">
+                    <div className={styles.playerLowPile}>
                       L{player.smallHand.length ? "✓" : ""}
                     </div>
-                    <div className="player-high-pile">
+                    <div className={styles.playerHighPile}>
                       H{player.bigHand.length ? "✓" : ""}
                     </div>
                   </>
@@ -410,7 +387,7 @@ export const PaiGowBoard = ({
             fontSize: "3rem",
             fontWeight: "bold",
             fontFamily: "Gmhightop",
-            top: "35%",
+            top: "40%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             textAlign: "center",

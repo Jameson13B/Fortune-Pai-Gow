@@ -107,7 +107,7 @@ function evaluateHand({ G, playerID }) {
     player.bank += player.bet[0] // Add the main bet to the player's bank
   } else if (smallHandWinner === "dealer" && bigHandWinner === "dealer") {
     player.outcome = [-1, -1] // Dealer wins both hands
-    player.bet = [0, 0] // Reset bets
+    player.bet[0] = 0 // Reset main bet
   } else {
     // Player wins one hand, its a tie
     player.outcome = [
@@ -121,10 +121,9 @@ function evaluateHand({ G, playerID }) {
     const bonusPayout = parseInt(bonus.pay.split(":")[0])
 
     player.bank += bonusBet * bonusPayout
-    player.bet[1] = 0
     player.outcome.push(1)
   } else {
-    player.bet[1] = 0
+    player.bet[1] = 0 // Reset bonus bet
     player.outcome.push(-1)
   }
 }

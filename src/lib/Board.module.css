@@ -1,4 +1,4 @@
-.paigow-board {
+.paigowBoard {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -10,12 +10,12 @@
   font-family: "Courier New", Courier, monospace;
 }
 
-.table-felt {
+.tableFelt {
   position: relative;
   width: 90%;
   height: 80%;
   background-color: #35654d;
-  border-radius: 200px 200px 50% 50%;
+  border-radius: 150px 150px 50% 50%;
   border: 32px solid #4a3b2a; /* Wood trim */
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.dealer-area {
+.dealerArea {
   position: absolute;
   top: 6%;
   left: 50%;
@@ -36,7 +36,7 @@
   font-family: "Gmhightop";
 }
 
-.dealer-button {
+.dealerButton {
   margin-top: 10px;
   padding: 8px 16px;
   font-size: 1.2rem;
@@ -48,15 +48,17 @@
   font-weight: bold;
 }
 
-.dealer-button:disabled {
+.dealerButton:disabled {
   background-color: #95a5a6;
   cursor: not-allowed;
   opacity: 0.7;
 }
 
-.payout-chart {
+.tableInfo {
   position: absolute;
-  font-size: 0.7rem;
+  top: 8%;
+  left: 10%;
+  font-size: 0.65rem;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   padding: 6px 8px;
@@ -64,63 +66,95 @@
   opacity: 0.7;
   text-align: left;
   line-height: 1.2;
+  width: 250px;
 }
 
-.payout-chart.left {
-  top: 5%;
-  left: 10%;
+.tableInfoContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.payout-chart.right {
-  top: 5%;
+.tableInfoContainer div {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  padding: 6px 0 4px 2px;
+}
+
+.tableInfoContainer div:last-of-type {
+  justify-content: space-around;
+  align-items: center;
+  width: 65%;
+  padding: 6px 0 4px 6px;
+}
+
+.tableTitle {
+  text-align: center;
+  display: block;
+  font-size: 0.9rem;
+  font-family: "Gmhightop";
+}
+
+.payoutChart {
+  position: absolute;
+  top: 3%;
   right: 10%;
+  font-size: 0.65rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 6px 8px;
+  color: #ffd700;
+  opacity: 0.7;
+  text-align: left;
+  line-height: 1.2;
+  width: 250px;
 }
 
-.payout-chart div {
+.payoutChart div {
   display: flex;
   justify-content: space-between;
-  font-size: 0.5rem;
-  gap: 10px;
+  font-size: 0.65rem;
+  gap: 4px;
+  text-align: center;
 }
-.payout-chart div:first-of-type {
+.payoutChart div:first-of-type {
   font-weight: bold;
+  font-size: 0.8rem;
 }
 
-.table-code {
-  position: absolute;
-  top: 0;
-  font-size: 0.9rem;
+.tableCode {
+  font-size: 0.75rem;
   font-family: "Gmhightop";
   color: #ffd700;
   opacity: 0.7;
-  top: 0.5%;
-}
-.table-code.left {
-  left: 13%;
-}
-.table-code.right {
-  right: 13%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.join-code-label {
+.tableCode span:first-of-type {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+.joinCodeLabel {
   font-size: 0.9rem;
   font-family: "Gmhightop";
   color: #ffd700;
   margin: 0 0 4px;
 }
-.join-code-container {
+.joinCodeContainer {
   position: absolute;
   top: 9%;
+  left: 3%;
   opacity: 0.7;
 }
-.join-code-container.right {
-  right: 3%;
-}
-.join-code-container.left {
-  left: 3%;
-}
 
-.player-seat {
+.playerSeat {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -131,14 +165,14 @@
 }
 
 /* Betting spots */
-.betting-area {
+.bettingArea {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.main-bet-circle {
+.mainBetCircle {
   width: 50px;
   height: 50px;
   border: 3px solid #ffd700;
@@ -150,7 +184,7 @@
   margin-bottom: 5px;
 }
 
-.bonus-bet-spot {
+.bonusBetSpot {
   width: 35px;
   height: 35px;
   border: 2px solid #ff4500;
@@ -166,7 +200,7 @@
   z-index: 1;
 }
 
-.player-info {
+.playerInfo {
   margin-top: 10px;
   background: rgba(0, 0, 0, 0.6);
   color: white;
@@ -178,21 +212,21 @@
   cursor: pointer;
 }
 
-.player-connected {
+.playerConnected {
   margin-left: 5px;
   padding: 0 5px;
   height: 10px;
   border-radius: 50%;
   background-color: #00ff00;
 }
-.player-disconnected {
+.playerDisconnected {
   margin-left: 5px;
   padding: 0 5px;
   height: 10px;
   border-radius: 50%;
   background-color: #ff0000;
 }
-.player-low-pile {
+.playerLowPile {
   text-align: center;
   color: #e0e0e0;
   border: 2px solid rgba(255, 215, 0, 0.3);
@@ -204,7 +238,7 @@
   font-family: "Gmhightop";
 }
 
-.player-high-pile {
+.playerHighPile {
   text-align: center;
   color: #e0e0e0;
   border: 2px solid rgba(255, 215, 0, 0.3);
@@ -221,7 +255,7 @@
 
 /* We can add more if needed, but 5 seats (0-4) covers the default 4 players + 1 */
 
-.chip {
+.mainChip {
   width: 90%;
   height: 90%;
   border-radius: 50%;
@@ -232,14 +266,21 @@
   color: white;
   font-size: 0.8rem;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
-
-.main-chip {
   background: radial-gradient(circle at 30% 30%, #e74c3c, #c0392b);
   border: 2px dashed white;
 }
 
-.bonus-chip {
+.bonusChip {
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+  font-size: 0.8rem;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
   background: radial-gradient(circle at 30% 30%, #3498db, #2980b9);
   border: 2px dashed white;
 }
