@@ -2,8 +2,7 @@ import { useState, useRef } from "react"
 import { LobbyClient } from "boardgame.io/client"
 import styles from "./Lobby.module.css"
 
-const { protocol, hostname, port } = window.location
-const server = `${protocol}//${hostname}:${port}`
+const server = window.location.origin
 
 export const Lobby = ({ setPlayer, setTableCode, setRole, role }) => {
   const [joinMatchID, setJoinMatchID] = useState(
@@ -42,7 +41,8 @@ export const Lobby = ({ setPlayer, setTableCode, setRole, role }) => {
           })
       )
 
-  const handleJoinGame = () => {
+  const handleJoinGame = (e) => {
+    e.preventDefault()
     lobbyClient.current
       .joinMatch("fortune-paigow", joinMatchID, { playerName: joinPlayerName })
       .then(({ playerCredentials, playerID }) => {

@@ -7,8 +7,7 @@ import { Lobby } from "./lib/Lobby"
 import { PaiGowGame } from "./lib/Game"
 import { PaiGowBoard } from "./lib/Board"
 
-const { protocol, hostname, port } = window.location
-const server = `${protocol}//${hostname}:${port}`
+const server = window.location.origin
 
 const PaiGowClient = Client({
   game: PaiGowGame,
